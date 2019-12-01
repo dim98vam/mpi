@@ -18,16 +18,16 @@ library:
 	cd knnring; cp lib/*.a inc/knnring.h ../; cd .. 
 
 
-#test_sequential: library
-        # tar -xvzf code.tar.gz
-	#$(MPICC) $(INCLUDES) tester.c knnring_mpiSynchronous.a -o $@ $(LINK) -lopenblas -lm
-	#./test_sequential
+test_sequential: library
+        #tar -xvzf code.tar.gz
+	$(MPICC) $(INCLUDES) tester.c knnring_mpiSynchronous.a -o $@ $(LINK) -lopenblas -lm
+	./test_sequential
 
 
 test_mpi:
 	$(MPICC) $(INLCUDES) tester_mpi.c knnring_mpiSynchronous.a -o $@ $(LINK) -lopenblas -lm 
-	$(MPIRUN) ./test_mpi s
+	$(MPIRUN) ./test_mpi 
 	rm test_mpi 
 	$(MPICC) $(INLCUDES) tester_mpi.c knnring_mpiAsynchronous.a -o $@ $(LINK) -lopenblas -lm
-	$(MPIRUN) ./test_mpi a 
+	$(MPIRUN) ./test_mpi 
 
