@@ -242,7 +242,7 @@ knnresult distrAllkNN(double* X,int n,int d,int k){
    MPI_Request reqs[4];
    knnresult* finalResult;
    double* Y;
-   double min,max,minTemp,maxTemp;
+   //double min,max,minTemp,maxTemp;
 
    //define process' pid and number of processes in total
    MPI_Comm_rank(MPI_COMM_WORLD, &pid);
