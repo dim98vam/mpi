@@ -242,6 +242,7 @@ knnresult distrAllkNN(double* X,int n,int d,int k){
    MPI_Request reqs[4];
    knnresult* finalResult;
    double* Y;
+   double min,max,minTemp,maxTemp;
 
    //define process' pid and number of processes in total
    MPI_Comm_rank(MPI_COMM_WORLD, &pid);
@@ -312,6 +313,23 @@ knnresult distrAllkNN(double* X,int n,int d,int k){
 
        //calculate new distances and update finalResult for last elements received
        kNNMpi(X,Y,finalResult->ndist,indexes ,n,n,d,k,finalResult,pid);
-
+	
+       int t;
+       double maxTemp=0;
+       double minTemp=-1.0;
+	
+      /* //code section meant just for finding min and max among all distances and 
+         not meant for crucial testing hence the comment section
+       for(t=0;t<n;++t){
+          if((finalResult->ndist)[1+t*k]<minTemp||min==-1.0)
+		  minTemp=(finalResult->ndist)[1+t*k];
+	  if((finalResult->ndist)[n-1+t*k]>maxTemp)
+		  maxTemp=(finalResult->ndist)[n-1+t*k];
+       }
+       
+       MPI_Allreduce(&minTemp,&min,1,MPI_FLOAT,MPI_MIN,0,MPI_COMM_WORLD);
+       MPI_Allreduce(&maxTemp,&max,1,MPI_FLOAT,MPI_MAX,3,MPI_COMM_WORLD);
+       */
+       
        return *finalResult;
 }
