@@ -8,7 +8,7 @@ MPIRUN = mpirun
 INCLUDES= -I $(OPENBLAS_ROOT)/include
 LINK=-L $(OPENBLAS_ROOT)/lib
 
-all: library test_mpi clean
+all: library test_sequential test_mpi clean
 
 clean:
 	rm knnring_mpiSynchronous.a knnring_mpiAsynchronous.a test_mpi test_sequential knnring.h
