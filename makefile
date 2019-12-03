@@ -26,8 +26,8 @@ test_sequential: library
 
 test_mpi:
 	$(MPICC) $(INLCUDES) tester_mpi.c knnring_mpiSynchronous.a -o $@ $(LINK) -lopenblas -lm 
-	$(MPIRUN) ./test_mpi 
+	$(MPIRUN) -n 2 ./test_mpi 
 	rm test_mpi 
 	$(MPICC) $(INLCUDES) tester_mpi.c knnring_mpiAsynchronous.a -o $@ $(LINK) -lopenblas -lm
-	$(MPIRUN) ./test_mpi 
+	$(MPIRUN) -n 2 ./test_mpi 
 
