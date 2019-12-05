@@ -213,20 +213,19 @@ void kNNMpi(double* X,double* Y,double* kNeighborsDist,int* indx ,int n,int m,in
         calculateDistances(X,Y,n,m,d,&distanceMatrix);
         //find and order in ascending manner the k smallest elements for its row
         //of the distanceMatrix
-        int* index=(int*)malloc(m*n*sizeof(int));
+        int* index=(int*)malloc(n*sizeof(int));
         int i;
-        for(i=0;i<m;++i)
-            memcpy(&index[n*i],indx,n*sizeof(int));
-
+        
         /*order elements and return resulting tables in knnstruct*/
         double* kthElement;
         for(i=0;i<m;++i){
             //order only the necessary k elements to save time
-            kthElement=quickselect(n,index+i*n,distanceMatrix+i*n,distanceMatrix+i*n+(n-1),k);
-            quickSort(index+i*n,distanceMatrix+i*n,kthElement);
+            memcpy(index,indx,n*sizeof(int));
+	    kthElement=quickselect(n,index,distanceMatrix+i*n,distanceMatrix+i*n+(n-1),k);
+            quickSort(index,distanceMatrix+i*n,kthElement);
 
             //merge k elements of row i into result table row i of holder
-            merge((holder->ndist)+i*k,distanceMatrix+i*n,(holder->nidx)+i*k,index+i*n,k,pid);
+            merge((holder->ndist)+i*k,distanceMatrix+i*n,(holder->nidx)+i*k,index,k,pid);
         }
 
 }
