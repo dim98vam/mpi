@@ -314,11 +314,11 @@ knnresult distrAllkNN(double* X,int n,int d,int k){
        //calculate new distances and update finalResult for last elements received
        kNNMpi(X,Y,finalResult->ndist,indexes ,n,n,d,k,finalResult,pid);
 	
-       int t;
+      /* int t;
        double maxTemp=0;
        double minTemp=-1.0;
 	
-      /* //code section meant just for finding min and max among all distances and 
+       //code section meant just for finding min and max among all distances and 
          not meant for crucial testing hence the comment section
        for(t=0;t<n;++t){
           if((finalResult->ndist)[1+t*k]<minTemp||min==-1.0)
