@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # define the C/C++ compiler to use,default here is clang
 CC = gcc-7
 MPICC = mpicc
-MPIRUN = mpirun 
+MPIRUN = mpirun --oversubscribe 
 INCLUDES= -I $(OPENBLAS_ROOT)/include
 LINK=-L $(OPENBLAS_ROOT)/lib
 
